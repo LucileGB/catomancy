@@ -1,13 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-# from .forms import PlayerCreationForm, PlayerChangeForm
-from .models import Player, PlayerAccount
+from .forms import AccountCreationForm, AccountChangeForm
+from .models import Account
 
-class PlayerAdmin(UserAdmin):
-    # add_form = PlayerCreationForm
-    # form = PlayerChangeForm
-    model = Player
+class AccountAdmin(UserAdmin):
     ordering = ('email', 'username', 'is_staff', 'is_superuser',)
     list_filter = ('email', 'username', 'is_staff', 'is_superuser',)
     list_display = ['email', 'username', 'is_staff', 'is_superuser', 'date_joined']
@@ -22,7 +19,10 @@ class PlayerAdmin(UserAdmin):
                                     'phone_number')}),
         ('Permissions', {'fields': ('is_staff', 'is_superuser')}),
     )
+    
+    model = Account
+    form = AccountChangeForm
+    add_form = AccountCreationForm
 
 
-admin.site.register(Player, PlayerAdmin)
-admin.site.register(PlayerAccount)
+admin.site.register(Account, AccountAdmin)

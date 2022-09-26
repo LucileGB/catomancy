@@ -5,29 +5,28 @@ from django.utils.safestring import mark_safe
 from . import views
 
 
-class GameRootView(routers.APIRootView):
+class AccountRootView(routers.APIRootView):
     """
     Controls appearance of the API root view
     """
     def get_view_name(self):
-        return "Game API"
+        return "Account Root"
 
     def get_view_description(self, html=False):
-        text = "THis is a test"
+        text = "This is the root for account management."
         if html:
             return mark_safe(f"<p>{text}</p>")
         else:
             return text
 
 
-class CatRouter(routers.DefaultRouter):
-    APIRootView = GameRootView
+class AccountRouter(routers.DefaultRouter):
+    APIRootView = AccountRootView
 
 
-router = CatRouter()
-router.register(r'accounts', views.PlayerViewSet, basename='player_accounts')
-router.register(r'cats', views.CatViewSet, basename='cats')
-
+router = AccountRouter()
+router.register(r'accounts', views.AccountViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

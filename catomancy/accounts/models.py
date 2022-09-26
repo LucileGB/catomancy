@@ -7,17 +7,17 @@ from django.utils.translation import gettext_lazy as _
 
 
 
-class PlayerManager(UserManager):
+class AccountManager(UserManager):
     def get_by_natural_key(self, username):
         case_insensitive_username_field = '{}__iexact'.format(self.model.USERNAME_FIELD)
         return self.get(**{case_insensitive_username_field: username})
 
 
-class Player(AbstractBaseUser, PermissionsMixin):
+class Account(AbstractBaseUser, PermissionsMixin):
     """
     Handle user-specific logic (email, username, etc.)
     """
-    objects = PlayerManager()
+    objects = AccountManager()
 
     username = models.CharField(
         _("username"),
@@ -58,21 +58,9 @@ class Player(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ["email"]
 
     class Meta:
-        verbose_name = _("player")
-        verbose_name_plural = _("players")
+        verbose_name = _("account")
+        verbose_name_plural = _("accounts")
 
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email.lower())
-
-
-class PlayerAccount(models.Model):
-    """
-    Handle pure game logic (house, money, inventory...)
-    """
-    player = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE
-        )
-    house = models.PositiveIntegerField(default=1)
-    money = models.IntegerField(default=100)

@@ -1,11 +1,11 @@
 from django.contrib.auth.models import Group
 from rest_framework import serializers
 
-from .models import Player
+from .models import Account
 
-class PlayerSerializer(serializers.HyperlinkedModelSerializer):
+class AccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Player
+        model = Account
         fields = ['url', 'username', 'email', 'groups']
 
 

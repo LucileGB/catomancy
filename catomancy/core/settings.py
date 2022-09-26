@@ -26,7 +26,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'rest_framework',
     'game.apps.GameConfig',
-    'players.apps.PlayersConfig',
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "players.Player"
+AUTH_USER_MODEL = "accounts.Account"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

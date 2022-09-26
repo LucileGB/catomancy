@@ -2,15 +2,15 @@ from django.contrib.auth.models import Group
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from .models import Player
-from .serializers import PlayerSerializer, GroupSerializer
+from .models import Account
+from .serializers import AccountSerializer, GroupSerializer
 
-class PlayerViewSet(viewsets.ModelViewSet):
+class AccountViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = Player.objects.all().order_by('-date_joined')
-    serializer_class = PlayerSerializer
+    queryset = Account.objects.all().order_by('-date_joined')
+    serializer_class = AccountSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 

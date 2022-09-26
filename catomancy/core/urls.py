@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from players import views
+from accounts import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('rest_framework.urls')),
     path('', include('game.urls')),
-    path('players/', include('players.urls'))
+    path('accounts/', include('accounts.urls'))
 ]

@@ -39,3 +39,15 @@ class Contact(models.Model):
 
     class Meta:
         unique_together = ('follower', 'followee')
+
+
+class Player(models.Model):
+    """
+    Handle pure game logic (house, money, inventory...)
+    """
+    player = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+        )
+    house = models.PositiveIntegerField(default=1)
+    money = models.IntegerField(default=100)
